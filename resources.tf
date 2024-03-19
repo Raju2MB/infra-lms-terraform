@@ -205,3 +205,18 @@ resource "aws_security_group" "lms-db-sg" {
     Name = "lms-db-sg"
   }
 }
+
+
+  ami                    = "ami-05c969369880fa2c2"
+  instance_type          = "t2.medium"
+  key_name               = new
+  vpc_security_group_ids = aws_vpc.lms-vpc.id
+
+  tags = {
+    Name = "public_instance"
+  }
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp2"
+  }
