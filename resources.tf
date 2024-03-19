@@ -205,18 +205,3 @@ resource "aws_security_group" "lms-db-sg" {
     Name = "lms-db-sg"
   }
 }
-
-resource "aws_instance" "public_instance" {
-  ami                    = "ami-05c969369880fa2c2"
-  instance_type          = "t2.medium"
-  vpc_security_group_ids = "lms-web-sg"
-
-  tags = {
-    Name = "public_instance"
-  }
-
-  root_block_device {
-    volume_size = 30
-    volume_type = "gp2"
-  }
-}
