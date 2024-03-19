@@ -209,7 +209,7 @@ resource "aws_security_group" "lms-db-sg" {
 resource "aws_instance" "public_instance" {
   ami                    = "ami-05c969369880fa2c2"
   instance_type          = "t2.medium"
-  vpc_security_group_ids = lms-web-sg
+  vpc_security_group_ids = "lms-web-sg"
 
   tags = {
     Name = "public_instance"
