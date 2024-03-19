@@ -205,3 +205,20 @@ resource "aws_security_group" "lms-db-sg" {
     Name = "lms-db-sg"
   }
 }
+
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+
+  name = "single-instance"
+
+  instance_type          = "t2.micro"
+  key_name               = "new"
+  monitoring             = true
+  vpc_security_group_ids = "aws_vpc.lms-vpc.id"
+  subnet_id              = "lms-web-subnet"
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
