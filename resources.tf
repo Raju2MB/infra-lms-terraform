@@ -206,7 +206,7 @@ resource "aws_security_group" "lms-db-sg" {
   }
 }
 
-
+resource "aws_instance" "public_instance" {
   ami                    = "ami-05c969369880fa2c2"
   instance_type          = "t2.medium"
   key_name               = new
@@ -220,3 +220,4 @@ resource "aws_security_group" "lms-db-sg" {
     volume_size = 30
     volume_type = "gp2"
   }
+}
