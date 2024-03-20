@@ -207,7 +207,7 @@ resource "aws_security_group" "IBM-database-sg" {
 }
 
 # ec2 instence creation
-resource "aws_instance" "web" {
+resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t3.micro"
@@ -215,24 +215,17 @@ resource "aws_instance" "web" {
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
 
   tags = {
-    Name = "web-server"
+    Name = "Jenkins"
   }
 }
-
-resource "aws_instance" "database" {
+resource "aws_instance" "Sonar-Qube & nexus" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t3.micro"
-  subnet_id = aws_subnet.IBM-database-subnet.id
-  vpc_security_group_ids =[aws_security_group.IBM-database-sg.id]
+  subnet_id = aws_subnet.IBM-web-subnet.id
+  vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
 
   tags = {
-    Name = "database-server"
+    Name = "Sonar-Qube & nexus"
   }
 }
-
-
-
-
-
-
