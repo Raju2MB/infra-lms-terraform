@@ -46,7 +46,6 @@ resource "aws_route_table" "IBM-web-rt" {
   vpc_id = aws_vpc.IBM-vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.IBM-Igw.id
   }
 
