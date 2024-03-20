@@ -210,7 +210,7 @@ resource "aws_security_group" "IBM-database-sg" {
 resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
-  instance_type = "t3.micro"
+  instance_type = "t2.medium"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
 
@@ -221,7 +221,7 @@ resource "aws_instance" "Jenkins" {
 resource "aws_instance" "Sonar-Qube & nexus" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
-  instance_type = "t3.micro"
+  instance_type = "t2.medium"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
 
