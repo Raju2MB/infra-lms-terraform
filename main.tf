@@ -208,7 +208,7 @@ resource "aws_security_group" "IBM-database-sg" {
 
 # ec2 instence creation
 resource "aws_instance" "web" {
-  ami           = "ami-080e1f13689e07408"
+  ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t3.micro"
   subnet_id = aws_subnet.IBM-web-subnet.id
