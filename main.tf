@@ -219,6 +219,18 @@ resource "aws_instance" "web" {
   }
 }
 
+resource "aws_instance" "database" {
+  ami           = "ami-05c969369880fa2c2"
+  key_name = "IBM"
+  instance_type = "t3.micro"
+  subnet_id = aws_subnet.IBM-database-subnet.id
+  vpc_security_group_ids =[aws_security_group.IBM-database-sg.id]
+
+  tags = {
+    Name = "database-server"
+  }
+}
+
 
 
 
