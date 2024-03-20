@@ -229,7 +229,7 @@ resource "aws_instance" "Jenkins" {
     Name = "Jenkins"
   }
 }
-resource "aws_instance" "SonarQube and nexus" {
+resource "aws_instance" "SonarQube-nexus" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t2.medium"
@@ -237,6 +237,6 @@ resource "aws_instance" "SonarQube and nexus" {
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
 
   tags = {
-    Name = "SonarQube and nexus"
+    Name = "SonarQube-nexus"
   }
 }
