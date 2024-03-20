@@ -60,7 +60,7 @@ resource "aws_route_table" "IBM-database-rt" {
   vpc_id = aws_vpc.IBM-vpc.id
 
   tags = {
-    Name = "IBM-web-rt"
+    Name = "IBM-database-rt"
   }
 }
 
