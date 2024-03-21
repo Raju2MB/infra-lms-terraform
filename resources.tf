@@ -205,3 +205,16 @@ resource "aws_security_group" "lms-db-sg" {
     Name = "lms-db-sg"
   }
 }
+
+# ec2 instence creation
+resource "aws_instance" "Ansible-master" {
+  ami           = "ami-05c969369880fa2c2"
+  key_name = "IBM"
+  instance_type = "t2.medium"
+  subnet_id = aws_subnet.IBM-web-subnet.id
+  vpc_security_group_ids =[aws_security_group.lms-web-sg.id]
+
+  tags = {
+    Name = "Ansible-master"
+  }
+}
