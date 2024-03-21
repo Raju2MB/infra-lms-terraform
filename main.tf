@@ -162,6 +162,27 @@ resource "aws_security_group" "IBM-web-sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    description = "Jenkins from WWW"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "Sonarqube from WWW"
+    from_port   = 9000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "nexus from WWW"
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -222,6 +243,7 @@ resource "aws_instance" "Ansible-master" {
     volume_type = "gp2"
   }
 }
+
 resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
@@ -237,6 +259,7 @@ resource "aws_instance" "Jenkins" {
     volume_type = "gp2"
   }
 }
+
 resource "aws_instance" "SonarQube-nexus" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
