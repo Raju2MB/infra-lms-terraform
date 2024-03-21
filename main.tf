@@ -213,10 +213,17 @@ resource "aws_instance" "Ansible-master" {
   instance_type = "t2.medium"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
-  size = 30
 
   tags = {
     Name = "Ansible-master"
+  }
+}
+resource "aws_ebs_volume" "Vol-Jenkins" {
+  availability_zone = "us-west-1a"
+  size              = 30
+
+  tags = {
+    Name = "Vol-Jenkins"
   }
 }
 resource "aws_instance" "Jenkins" {
