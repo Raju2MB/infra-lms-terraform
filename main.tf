@@ -218,7 +218,7 @@ resource "aws_instance" "Ansible-master" {
     Name = "Ansible-master"
   }
   root_block_device {
-    volume_size = 15
+    volume_size = 30
     volume_type = "gp2"
   }
 }
@@ -231,10 +231,10 @@ resource "aws_instance" "Jenkins" {
 
   tags = {
     Name = "Jenkins"
-     root_block_device {
+  }
+  root_block_device {
     volume_size = 30
     volume_type = "gp2"
-  }
   }
 }
 resource "aws_instance" "SonarQube-nexus" {
@@ -247,7 +247,7 @@ resource "aws_instance" "SonarQube-nexus" {
   tags = {
     Name = "SonarQube-nexus"
   }
-   root_block_device {
+  root_block_device {
     volume_size = 15
     volume_type = "gp2"
   }
