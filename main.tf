@@ -84,7 +84,7 @@ resource "aws_network_acl" "IBM-web-nacl" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "10.3.0.0/18"
+    cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 65535
   }
@@ -93,9 +93,9 @@ resource "aws_network_acl" "IBM-web-nacl" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "10.3.0.0/18"
-    from_port  = 80
-    to_port    = 80
+    cidr_block = "0.3.0.0/0"
+    from_port  = 0
+    to_port    = 65535
   }
 
   tags = {
@@ -121,8 +121,8 @@ resource "aws_network_acl" "IBM-database-nacl" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "10.3.0.0/18"
-    from_port  = 80
-    to_port    = 80
+    from_port  = 0
+    to_port    = 65535
   }
 
   tags = {
