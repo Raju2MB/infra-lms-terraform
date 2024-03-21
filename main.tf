@@ -93,7 +93,7 @@ resource "aws_network_acl" "IBM-web-nacl" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "0.3.0.0/0"
+    cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 65535
   }
