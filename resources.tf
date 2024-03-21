@@ -211,7 +211,7 @@ resource "aws_instance" "Ansible-master" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t2.medium"
-  subnet_id = aws_subnet.IBM-web-subnet.id
+  subnet_id = aws_subnet.lms-db-sn.id
   vpc_security_group_ids =[aws_security_group.lms-web-sg.id]
 
   tags = {
