@@ -16,6 +16,9 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo chmod 777 /var/run/docker.sock
+
+#install sonarqube
+sudo apt update -y
 docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 
 # install nexus
