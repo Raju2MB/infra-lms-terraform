@@ -228,28 +228,13 @@ resource "aws_security_group" "IBM-database-sg" {
 }
 
 # ec2 instence creation
-resource "aws_instance" "Ansible-master" {
-  ami           = "ami-05c969369880fa2c2"
-  key_name = "IBM"
-  instance_type = "t2.medium"
-  subnet_id = aws_subnet.IBM-web-subnet.id
-  vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
-
-  tags = {
-    Name = "Ansible-master"
-  }
-  root_block_device {
-    volume_size = 30
-    volume_type = "gp2"
-  }
-}
-
 resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
   instance_type = "t2.medium"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
+  user_data = templatefile("./install_Jenkins.sh",{})
 
   tags = {
     Name = "Jenkins"
@@ -266,12 +251,13 @@ resource "aws_instance" "SonarQube-nexus" {
   instance_type = "t2.medium"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
+  user_data = templatefile("./install_sonarqube_nexus.sh",{})
 
   tags = {
     Name = "SonarQube-nexus"
   }
   root_block_device {
-    volume_size = 15
+    volume_size = 30
     volume_type = "gp2"
   }
 }
