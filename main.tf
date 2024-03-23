@@ -261,11 +261,10 @@ resource "aws_instance" "SonarQube-nexus" {
     volume_type = "gp2"
   }
   inline = {
-    "sudo apt-get update
-    sudo apt-get install docker.io -y
-    sudo usermod -aG docker ubuntu  
-    newgrp docker
-    sudo chmod 777 /var/run/docker.sock
-    docker run -d --name sonar -p 9000:9000 sonarqube:lts-community"
+    "sudo apt-get update,
+    sudo apt-get install docker.io -y,
+    sudo usermod -aG docker ubuntu,
+    sudo chmod 777 /var/run/docker.sock,
+    docker run -d --name sonar -p 9000:9000 sonarqube:lts-community",
   }
 }
