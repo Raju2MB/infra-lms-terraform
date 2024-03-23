@@ -231,7 +231,7 @@ resource "aws_security_group" "IBM-database-sg" {
 resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
-  instance_type = "t2.medium"
+  instance_type = "t2.large"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
   user_data = templatefile("./install_Jenkins.sh",{})
@@ -248,7 +248,7 @@ resource "aws_instance" "Jenkins" {
 resource "aws_instance" "SonarQube-nexus" {
   ami           = "ami-05c969369880fa2c2"
   key_name = "IBM"
-  instance_type = "t2.medium"
+  instance_type = "t2.large"
   subnet_id = aws_subnet.IBM-web-subnet.id
   vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
   user_data = templatefile("./install_sonarqube_nexus.sh",{})
