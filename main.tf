@@ -263,8 +263,7 @@ resource "aws_instance" "SonarQube-nexus" {
   inline = {
     "sudo apt-get update" \n
     "sudo apt-get install docker.io -y" \n
-    "sudo usermod -aG docker ubuntu" \n
-    "sudo chmod 777 /var/run/docker.sock" \n
+    "sudo chmod 766 /var/run/docker.sock" \n
     "docker run -d --name sonar -p 9000:9000 sonarqube:lts-community"
   }
 }
