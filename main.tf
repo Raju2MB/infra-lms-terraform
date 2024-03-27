@@ -1,84 +1,84 @@
-# creation of vpc (IBM)
-resource "aws_vpc" "IBM-vpc" {
+# creation of vpc (LMS)
+resource "aws_vpc" "LMS-vpc" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
 
   tags = {
-    Name = "IBM"
+    Name = "LMS"
   }
 }
 
 #websubnet
-resource "aws_subnet" "IBM-web-subnet" {
-  vpc_id     = aws_vpc.IBM-vpc.id
+resource "aws_subnet" "LMS-web-subnet" {
+  vpc_id     = aws_vpc.LMS-vpc.id
   cidr_block = "10.0.0.0/24"
   availability_zone = "us-west-1a"
   map_public_ip_on_launch = "true"
 
   tags = {
-    Name = "IBM-web-subnet"
+    Name = "LMS-web-subnet"
   }
 }
 
 # Database subnet
-resource "aws_subnet" "IBM-database-subnet" {
-  vpc_id     = aws_vpc.IBM-vpc.id
+resource "aws_subnet" "LMS-database-subnet" {
+  vpc_id     = aws_vpc.LMS-vpc.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-west-1a"
   map_public_ip_on_launch = "false"
 
   tags = {
-    Name = "IBM-database-subnet"
+    Name = "LMS-database-subnet"
   }
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "IBM-Igw" {
-  vpc_id = aws_vpc.IBM-vpc.id
+resource "aws_internet_gateway" "LMS-Igw" {
+  vpc_id = aws_vpc.LMS-vpc.id
 
   tags = {
-    Name = "IBM-Igw"
+    Name = "LMS-Igw"
   }
 }
 
 # web route table
-resource "aws_route_table" "IBM-web-rt" {
-  vpc_id = aws_vpc.IBM-vpc.id
+resource "aws_route_table" "LMS-web-rt" {
+  vpc_id = aws_vpc.LMS-vpc.id
 
   route { 
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.IBM-Igw.id
+    gateway_id = aws_internet_gateway.LMS-Igw.id
   }
 
   tags = {
-    Name = "IBM-web-rt"
+    Name = "LMS-web-rt"
   }
 }
 
 # database route table
-resource "aws_route_table" "IBM-database-rt" {
-  vpc_id = aws_vpc.IBM-vpc.id
+resource "aws_route_table" "LMS-database-rt" {
+  vpc_id = aws_vpc.LMS-vpc.id
 
   tags = {
-    Name = "IBM-database-rt"
+    Name = "LMS-database-rt"
   }
 }
 
 # web subnet association
-resource "aws_route_table_association" "IBM-web-ass" {
-  subnet_id      = aws_subnet.IBM-web-subnet.id
-  route_table_id = aws_route_table.IBM-web-rt.id
+resource "aws_route_table_association" "LMS-web-ass" {
+  subnet_id      = aws_subnet.LMS-web-subnet.id
+  route_table_id = aws_route_table.LMS-web-rt.id
 }
 
 # database subnet association
-resource "aws_route_table_association" "IBM-database-ass" {
-  subnet_id      = aws_subnet.IBM-database-subnet.id
-  route_table_id = aws_route_table.IBM-database-rt.id
+resource "aws_route_table_association" "LMS-database-ass" {
+  subnet_id      = aws_subnet.LMS-database-subnet.id
+  route_table_id = aws_route_table.LMS-database-rt.id
 }
 
 # web NACL
-resource "aws_network_acl" "IBM-web-nacl" {
-  vpc_id = aws_vpc.IBM-vpc.id
+resource "aws_network_acl" "LMS-web-nacl" {
+  vpc_id = aws_vpc.LMS-vpc.id
 
   egress {
     protocol   = "tcp"
@@ -99,13 +99,13 @@ resource "aws_network_acl" "IBM-web-nacl" {
   }
 
   tags = {
-    Name = "IBM-web-nacl"
+    Name = "LMS-web-nacl"
   }
 }
 
 # database NACL
-resource "aws_network_acl" "IBM-database-nacl" {
-  vpc_id = aws_vpc.IBM-vpc.id
+resource "aws_network_acl" "LMS-database-nacl" {
+  vpc_id = aws_vpc.LMS-vpc.id
 
   egress {
     protocol   = "tcp"
@@ -126,27 +126,27 @@ resource "aws_network_acl" "IBM-database-nacl" {
   }
 
   tags = {
-    Name = "IBM-database-nacl"
+    Name = "LMS-database-nacl"
   }
 }
 
 # web NACL association
-resource "aws_network_acl_association" "IBM-web-NACL-ass" {
-  network_acl_id = aws_network_acl.IBM-web-nacl.id
-  subnet_id      = aws_subnet.IBM-web-subnet.id
+resource "aws_network_acl_association" "LMS-web-NACL-ass" {
+  network_acl_id = aws_network_acl.LMS-web-nacl.id
+  subnet_id      = aws_subnet.LMS-web-subnet.id
 }
 
 # database NACL association
-resource "aws_network_acl_association" "IBM-database-NACL-ass" {
-  network_acl_id = aws_network_acl.IBM-database-nacl.id
-  subnet_id      = aws_subnet.IBM-database-subnet.id
+resource "aws_network_acl_association" "LMS-database-NACL-ass" {
+  network_acl_id = aws_network_acl.LMS-database-nacl.id
+  subnet_id      = aws_subnet.LMS-database-subnet.id
 }
 
 # web security groups
-resource "aws_security_group" "IBM-web-sg" {
-  name        = "IBM-web-traffic"
+resource "aws_security_group" "LMS-web-sg" {
+  name        = "LMS-web-traffic"
   description = "Allow SSH - HTTP inbound traffic"
-  vpc_id      = aws_vpc.IBM-vpc.id
+  vpc_id      = aws_vpc.LMS-vpc.id
 
   ingress {
     description = "SSH from WWW"
@@ -191,15 +191,15 @@ resource "aws_security_group" "IBM-web-sg" {
   }
 
   tags = {
-    Name = "IBM-web-sg"
+    Name = "LMS-web-sg"
   }
 }
 
 # database security groups
-resource "aws_security_group" "IBM-database-sg" {
-  name        = "IBM-database-traffic"
+resource "aws_security_group" "LMS-database-sg" {
+  name        = "LMS-database-traffic"
   description = "Allow SSH - Postgres inbound traffic"
-  vpc_id      = aws_vpc.IBM-vpc.id
+  vpc_id      = aws_vpc.LMS-vpc.id
 
   ingress {
     description = "SSH from WWW"
@@ -223,17 +223,17 @@ resource "aws_security_group" "IBM-database-sg" {
   }
 
   tags = {
-    Name = "IBM-database-sg"
+    Name = "LMS-database-sg"
   }
 }
 
 # ec2 instence creation
 resource "aws_instance" "Jenkins" {
   ami           = "ami-05c969369880fa2c2"
-  key_name = "IBM"
+  key_name = "LMS"
   instance_type = "t2.large"
-  subnet_id = aws_subnet.IBM-web-subnet.id
-  vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
+  subnet_id = aws_subnet.LMS-web-subnet.id
+  vpc_security_group_ids =[aws_security_group.LMS-web-sg.id]
   user_data = templatefile("./install_Jenkins.sh",{})
 
   tags = {
@@ -247,10 +247,10 @@ resource "aws_instance" "Jenkins" {
 
 resource "aws_instance" "SonarQube-nexus" {
   ami           = "ami-05c969369880fa2c2"
-  key_name = "IBM"
+  key_name = "LMS"
   instance_type = "t2.large"
-  subnet_id = aws_subnet.IBM-web-subnet.id
-  vpc_security_group_ids =[aws_security_group.IBM-web-sg.id]
+  subnet_id = aws_subnet.LMS-web-subnet.id
+  vpc_security_group_ids =[aws_security_group.LMS-web-sg.id]
   user_data = templatefile("./install_sonarqube_nexus.sh",{})
 
   tags = {
