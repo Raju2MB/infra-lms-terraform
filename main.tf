@@ -237,7 +237,7 @@ resource "aws_instance" "Jenkins" {
   user_data = templatefile("./install_Jenkins.sh",{})
 
   tags = {
-    Name = "Jenkins"
+    Name = "LMS_Jenkins"
   }
   root_block_device {
     volume_size = 30
@@ -254,7 +254,7 @@ resource "aws_instance" "SonarQube-nexus" {
   user_data = templatefile("./install_sonarqube_nexus.sh",{})
 
   tags = {
-    Name = "SonarQube-nexus"
+    Name = "LMS_SonarQube-nexus"
   }
   root_block_device {
     volume_size = 30
