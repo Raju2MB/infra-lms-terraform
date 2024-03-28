@@ -229,7 +229,7 @@ resource "aws_security_group" "LMS-database-sg" {
 
 # ec2 instence creation
 resource "aws_instance" "Jenkins" {
-  ami           = "ami-05295b6e6c790593e"
+  ami           = "ami-007020fd9c84e18c7"
   key_name = "LMS"
   instance_type = "t2.large"
   subnet_id = aws_subnet.LMS-web-subnet.id
@@ -246,7 +246,7 @@ resource "aws_instance" "Jenkins" {
 }
 
 resource "aws_instance" "SonarQube-nexus" {
-  ami           = "ami-05295b6e6c790593e"
+  ami           = "ami-007020fd9c84e18c7"
   key_name = "LMS"
   instance_type = "t2.large"
   subnet_id = aws_subnet.LMS-web-subnet.id
